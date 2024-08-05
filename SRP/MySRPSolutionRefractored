@@ -1,0 +1,92 @@
+#include <iostream>
+
+class Icon
+{
+	int x, y;
+    float speed, glow, energy;
+
+public:
+    Icon(){}
+    Icon(int _x,int _y, float s, float g, float e )
+    {
+        x=_x;
+		    y=_y;
+		    speed =s;
+		    glow = g;
+		    energy = e;
+    }
+	  virtual void move()=0;
+	  virtual void flair()=0;
+};
+
+class SliderIcon: public Icon{
+	  bool vertical;
+    int distance;
+public:
+    SliderIcon(){}
+	  SliderIcon(bool,int){}
+	  ~SliderIcon(){}
+	  void move()
+	  {
+		  std::cout << "moving as a Slider...\n";
+	  }
+
+	  void flair()
+	  {
+		  std::cout << "flairing as a Slider...\n";
+	  }
+};
+
+class SpinnerIcon:public Icon
+{
+	  bool clockwise;
+    bool expand;
+public:
+    SpinnerIcon(){}
+	  SpinnerIcon(bool,bool){}
+	  ~SpinnerIcon(){}
+	  void move()
+	  {
+		  std::cout << "moving as a Spinner...\n";
+	  }
+
+	  void flair()
+	  {
+		  std::cout << "flairing as a Spinner...\n";
+	  }
+};
+
+class HopperIcon: public Icon{
+	  bool visible;
+    int xcoord, ycoord;
+public:
+    HopperIcon(){}
+	  HopperIcon(bool,int,int){}
+	  ~HopperIcon(){}
+	  void move()
+	  {
+		  std::cout << "moving as a Hopper...\n";
+	  }
+
+	  void flair()
+	  {
+		  std::cout << "flairing as a Hopper...\n";
+	  }
+};
+
+int main() 
+{
+	Icon* pSIcon = new SliderIcon(true,30);
+	pSIcon->move();
+	pSIcon->flair();
+	delete pSIcon;
+	Icon* pHIcon = new HopperIcon(true,3,4);
+	pHIcon->move();
+	pHIcon->flair();
+	delete pHIcon;
+	Icon* pSPIcon = new SpinnerIcon(true,true);
+	pSPIcon->move();
+	pSPIcon->flair();
+	delete pSPIcon;
+  return 0;
+}
